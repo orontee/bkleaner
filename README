@@ -1,6 +1,6 @@
-=========================
- Bkleaner - EPUB cleaner
-=========================
+=================================
+ Bkleaner - Book cleaner utility
+=================================
 
 Change stylesheets of ebooks in EPUB format.
 
@@ -21,6 +21,12 @@ Dependancies
 ============
 
 cssutils
+
+Credits
+=======
+
+* Matthias Meulien <orontee@gmail.com>
+
 
 .. Local Variables:
 .. mode: rst;
