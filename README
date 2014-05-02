@@ -20,7 +20,8 @@ To uninstall::
 Dependancies
 ============
 
-cssutils
+Dependancies can be found in the file `requirements.txt`. Whole code
+has been tested under Python 3.
 
 Credits
 =======
