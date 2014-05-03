@@ -1,5 +1,5 @@
-"""
-Module gathering settings.
+"""Global settings.
+
 """
 
 LOGGING = {

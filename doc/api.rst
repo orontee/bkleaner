@@ -1,11 +1,6 @@
 API documentation
 =================
 
-Errors
-------
-.. automodule:: bkleaner.errors
-   :members:
-
 Schemes
 -------
 .. automodule:: bkleaner.schemes
@@ -19,4 +14,6 @@ Settings
 Transform
 ---------
 .. automodule:: bkleaner.transform
-   :members:
+
+.. autoclass:: bkleaner.transform.Transformer
+   :members: __init__, _apply, __call__

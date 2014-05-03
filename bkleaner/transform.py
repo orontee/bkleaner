@@ -1,5 +1,5 @@
-"""
-Module defining the transformation process.
+"""Definition of the transformation process.
+
 """
 
 import logging
@@ -8,20 +8,20 @@ logger = logging.getLogger('bkleaner')
 
 
 class Transformer(object):
-    """
-    Class representing objects that transform CSS style sheets
+    """Class representing objects that transform CSS style sheets
     according to a given scheme.
+
     """
     def __init__(self, scheme):
-        """
-        Store the scheme of transformations to apply.
+        """Store the scheme of transformations to apply.
+
         """
         self._scheme = scheme
     
     def _apply(self, t, selector, s):
-        """
-        Apply the transformation ``t`` to the style ``s`` found in 
-        the ``selector`` CSS selector.
+        """Apply the transformation ``t`` to the style ``s`` found in the
+        ``selector`` CSS selector.
+
         """
         if t['operator'] == 'set':
             if s.value != t['value']:
@@ -44,8 +44,8 @@ class Transformer(object):
 
 
     def __call__(self, sheet):
-        """
-        Transform the given CSS stylesheet.
+        """Transform the given CSS stylesheet.
+
         """
         for selector in sheet:
             if selector.selectorText in self._scheme.keys():

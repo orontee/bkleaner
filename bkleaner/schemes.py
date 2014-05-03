@@ -1,11 +1,10 @@
-"""
-Defines common transformation schemes.
+"""Definition of common transformation schemes.
 
 A scheme is an item of the ``scheme`` dictionary. Each scheme is
 itself a dictionary whose keys are CSS selectors and values describes
 transformations or list such descriptions.
 
-A transformation description is dictionary with the following keys: 
+A transformation description is a dictionary with the following keys:
 
 - ``property`` for the name of a CSS property to transform.
 
@@ -14,6 +13,7 @@ A transformation description is dictionary with the following keys:
 
 - ``value`` for the value to set or remove according to the choosen
   operation.
+
 """
 
 schemes = {'bibebook': {'.indent': [{'property': 'text-indent',
