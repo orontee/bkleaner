@@ -44,18 +44,23 @@ if __name__ == '__main__':
                 logger.error('File not found: {0}'.format(p))
                 exit(errors.FILE_NOT_FOUND)
             infos = f.infolist()
-            sf = f.open('stylesheet.css')
-            logger.info('Loading stylesheet.css')
+            ss = 'stylesheet.css'
+            try:
+                sf = f.open(ss)
+            except KeyError:
+                logger.error('Style sheet not found: {0}'.format(ss))
+                exit(errors.STYLE_SHEET_NOT_FOUND)
+            logger.info('Loading {0}'.format(ss))
             sheet = cssutils.parseString(sf.read())
             logger.info('Applying transformations')
             tr(sheet)
 
             root, ext = os.path.splitext(p)
-            target = root + '_clean' + ext
+            target = os.path.basename(root) + '_clean' + ext
             logger.info('Writing cleaned book to {0}'.format(target))
             of = ZipFile(target, 'w')
             for info in infos:
-                if info.filename != 'stylesheet.css':
+                if info.filename != ss:
                     of.writestr(info, f.read(info))
                 else:
                     of.writestr(info, sheet.cssText)
