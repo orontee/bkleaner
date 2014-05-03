@@ -7,10 +7,12 @@ Change stylesheets of ebooks in EPUB format.
 Installation
 ============
 
-To install locally using Python::
+To build a source distribution, one need `setuptools` then::
 
   python setup.py sdist
-  pip install -r requirements.txt
+
+To install locally using Python::
+
   pip install dist/bkleaner-0.1.tar.gz --user
 
 To uninstall::
@@ -20,8 +22,11 @@ To uninstall::
 Dependancies
 ============
 
-Dependancies can be found in the file `requirements.txt`. Whole code
-has been tested under Python 3.
+To create a source distribution, one need `setuptools`.
+
+All dependancies can be found in the file `setup.py`. 
+
+Whole code has been tested under Python 3.
 
 Credits
 =======
