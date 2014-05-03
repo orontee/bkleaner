@@ -1,15 +1,12 @@
 Installation
 ============
 
-The code has been written and tested with Python 3. To build a source
-distribution, one need the Python package `setuptools` then::
+The code has been written and tested with Python 3. To build and
+install a source distribution, one need the Python package
+`setuptools` then::
 
-  python setup.py sdist
-
-To install locally::
-
-  pip install dist/bkleaner-0.1.tar.gz --user
+  make install
 
 To uninstall::
 
-  pip uninstall bkleaner
+  make uninstall

@@ -1,7 +1,7 @@
 Welcome to bkleaner's documentation!
 ====================================
 
-A tool which allows to change stylesheets of ebooks in EPUB format.
+A tool which allows to change style sheets of books in EPUB format.
 
 Contents:
 
