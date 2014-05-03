@@ -17,7 +17,7 @@ class Transformer(object):
 
         """
         self._scheme = scheme
-    
+
     def _apply(self, t, selector, s):
         """Apply the transformation ``t`` to the style ``s`` found in the
         ``selector`` CSS selector.
@@ -41,7 +41,6 @@ class Transformer(object):
                 logger.info(msg.format(value=s.value,
                                        name=s.name,
                                        selector=selector.selectorText))
-
 
     def __call__(self, sheet):
         """Transform the given CSS stylesheet.
