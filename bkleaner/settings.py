@@ -1,6 +1,4 @@
-"""Global settings.
-
-"""
+"""Global settings."""
 
 LOGGING = {
     'version': 1,
