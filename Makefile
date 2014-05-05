@@ -1,9 +1,11 @@
+PYTHON = python
+
 version = 0.1
 
 sources = bkleaner/__init__.py bkleaner/errors.py bkleaner/schemes.py
 sources += bkleaner/settings.py bkleaner/transform.py scripts/bkleaner
 
-.PHONY: install uninstall clean distclean doc
+.PHONY: install uninstall clean distclean doc test
 
 dist/bkleaner-$(version).tar.gz: $(sources)
 	python setup.py sdist
@@ -26,3 +28,6 @@ distclean: clean
 
 doc:
 	cd doc; $(MAKE) html
+
+test:
+	PYTHONPATH=. $(PYTHON) bkleaner/tests/test_transform.py
