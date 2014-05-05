@@ -36,7 +36,8 @@ class Transformer(object):
     def __call__(self, sheet):
         """Transform the given CSS stylesheet."""
         for selector in sheet:
-            if selector.selectorText in self._scheme.keys():
+            if (hasattr(selector, 'selectorText')
+                and selector.selectorText in self._scheme.keys()):
                 trans = self._scheme[selector.selectorText]
                 if not isinstance(trans, list):
                     trans = [trans]
