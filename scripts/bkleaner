@@ -34,7 +34,7 @@ if __name__ == '__main__':
     except KeyError:
         logger.error('Unknown scheme: {0}'.format(args.rules))
         exit(errors.SCHEME_NOT_FOUND)
-    tr = Transformer(scheme)
+    tr = Transformer(scheme['transformations'])
     if args.path:        
         for p in args.path:
             logger.info('Opening {0}'.format(p))
@@ -44,7 +44,7 @@ if __name__ == '__main__':
                 logger.error('File not found: {0}'.format(p))
                 exit(errors.FILE_NOT_FOUND)
             infos = f.infolist()
-            ss = 'stylesheet.css'
+            ss = scheme['path']
             try:
                 sf = f.open(ss)
             except KeyError:
