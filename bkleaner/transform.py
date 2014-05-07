@@ -12,27 +12,25 @@ class Transformer(object):
         """Store the scheme of transformations to apply."""
         self._scheme = scheme
 
-    def _apply(self, t, selector, s):
-        """Apply transformation to style."""
-        if t['operator'] == 'set':
-            if s.value != t['value']:
-                s.value = t['value']
-                msg = ("""Setting value of '{name}' attribute """
-                       """for '{selector}' selector""")
-                logger.info(msg.format(value=s.value,
-                                       name=s.name,
-                                       selector=selector.selectorText))
-        elif t['operator'] == 'remove':
-            values = [v.strip() for v in s.value.split(',')]
-            if t['value'] in values:
-                values = [v for v in values if v != t['value']]
-                s.value = ', '.join(values)
-                msg = ("""Removing value of '{name}' attribute """
-                       """for '{selector}' selector""")
-                logger.info(msg.format(value=s.value,
-                                       name=s.name,
-                                       selector=selector.selectorText))
+    def _set_property(self, selector, name, value):
+        selector.style.setProperty(name, value)
+        msg = ("""Setting value of '{name}' attribute """
+               """for '{selector}' selector""")
+        logger.info(msg.format(value=value,
+                               name=name,
+                               selector=selector.selectorText))
 
+    def _remove_from_property(self, selector, name, raw, value):
+        values = [v.strip() for v in raw.split(',')]
+        if value in values:
+            values = [v for v in values if v != value]
+            selector.style.setProperty(name, ', '.join(values))
+            msg = ("""Removing value of '{name}' attribute """
+                   """for '{selector}' selector""")
+            logger.info(msg.format(value=value,
+                                   name=name,
+                                   selector=selector.selectorText))
+        
     def __call__(self, sheet):
         """Transform the given CSS stylesheet."""
         for selector in sheet:
@@ -45,7 +43,14 @@ class Transformer(object):
                 for n, t in enumerate(trans):
                     props[t['property']] = n
                 if len(props) > 0:
-                    for s in selector.style:
-                        if s.name in props.keys():
-                            t = trans[props[s.name]]
-                            self._apply(t, selector, s)
+                    for t in trans:
+                        name = t['property']
+                        operator = t['operator']
+                        target = t['value']
+                        current = selector.style.getPropertyValue(name)
+                        if operator == 'set':
+                            if current != target:
+                                self._set_property(selector, name, target)
+                        elif operator == 'remove' and current != "":
+                            self._remove_from_property(selector, name,
+                                                       current, target)

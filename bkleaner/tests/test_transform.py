@@ -19,6 +19,9 @@ class TestTransform(TestCase):
     def test_call(self):
         scheme = {'p': [{'property': 'text-indent',
                          'value': '1em',
+                         'operator': 'set'},
+                        {'property': 'color',
+                         'value': 'red',
                          'operator': 'set'}]}
 
         Transformer(scheme)(self.sheet)
@@ -28,6 +31,10 @@ class TestTransform(TestCase):
                 for s in selector.style:
                     if s.name == 'text-indent':
                         self.assertEqual(s.value, '1em')
+                    elif s.name == 'color':
+                        self.assertEqual(s.value, 'red')
+                        found = True
+        self.assertTrue(found)
 
 
 if __name__ == '__main__':
