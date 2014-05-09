@@ -8,7 +8,8 @@ CSS = u"""/* a comment with umlaut &auml; */
 @namespace html "http://www.w3.org/1999/xhtml";
 @variables { BG: #fff }
 html|a { color:red; background: var(BG) }
-p { margin: 0; text-indent: 0 }"""
+p { margin: 0; text-indent: 0 }
+img { width: 100% }"""
 
 
 class TestTransform(TestCase):
@@ -22,19 +23,20 @@ class TestTransform(TestCase):
                          'operator': 'set'},
                         {'property': 'color',
                          'value': 'red',
-                         'operator': 'set'}]}
-
+                         'operator': 'set'}],
+                  'img': {'property': 'width',
+                          'operator': 'remove'}}
         Transformer(scheme)(self.sheet)
         for selector in self.sheet:
-            if (hasattr(selector, 'selectorText')
-                and selector.selectorText == 'p'):
-                for s in selector.style:
-                    if s.name == 'text-indent':
-                        self.assertEqual(s.value, '1em')
-                    elif s.name == 'color':
-                        self.assertEqual(s.value, 'red')
-                        found = True
-        self.assertTrue(found)
+            if hasattr(selector, 'selectorText'):
+                if selector.selectorText == 'p':
+                    self.assertEqual(selector.style.getPropertyValue(
+                        'text-indent'), '1em')
+                    self.assertEqual(selector.style.getPropertyValue(
+                        'color'), 'red')
+                elif selector.selectorText == 'img':
+                    self.assertEqual(selector.style.getPropertyValue(
+                        'width'), '')
 
 
 if __name__ == '__main__':

@@ -21,15 +21,23 @@ class Transformer(object):
                                selector=selector.selectorText))
 
     def _remove_from_property(self, selector, name, raw, value):
-        values = [v.strip() for v in raw.split(',')]
-        if value in values:
-            values = [v for v in values if v != value]
+        if value is None:
+            must_remove = True
+        else:
+            values = [v.strip() for v in raw.split(',')]
+            must_remove = (values == [value])
+            
+        if must_remove:
+            selector.style.removeProperty(name)
+            msg = ("""Removing attribute '{name}' """
+                   """ for '{selector}' selector""")          
+        elif value in values:
             selector.style.setProperty(name, ', '.join(values))
             msg = ("""Removing value of '{name}' attribute """
                    """for '{selector}' selector""")
-            logger.info(msg.format(value=value,
-                                   name=name,
-                                   selector=selector.selectorText))
+        logger.info(msg.format(value=value,
+                               name=name,
+                               selector=selector.selectorText))
         
     def __call__(self, sheet):
         """Transform the given CSS stylesheet."""
@@ -46,7 +54,7 @@ class Transformer(object):
                     for t in trans:
                         name = t['property']
                         operator = t['operator']
-                        target = t['value']
+                        target = t.get('value', None)
                         current = selector.style.getPropertyValue(name)
                         if operator == 'set':
                             if current != target:
