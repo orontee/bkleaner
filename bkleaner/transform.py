@@ -32,6 +32,7 @@ class Transformer(object):
             msg = ("""Removing attribute '{name}' """
                    """ for '{selector}' selector""")          
         elif value in values:
+            values = [v for v in values if v != value]
             selector.style.setProperty(name, ', '.join(values))
             msg = ("""Removing value of '{name}' attribute """
                    """for '{selector}' selector""")
