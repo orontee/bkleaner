@@ -3,8 +3,8 @@
 A scheme is an item of the ``scheme`` dictionary. Each scheme is
 itself a dictionary with two keys: ``path`` and ``transformations``.
 The value of the ``path`` key is the path of the style sheet where
-transformations apply. The value of the ``transformations`` dictionary
-is a dictionary whose keys are CSS selectors and values describes
+transformations apply. The value of the ``transformations`` key is a
+dictionary whose keys are CSS selectors and values describes
 transformations or list such descriptions.
 
 A transformation description is a dictionary with the following keys:
@@ -15,9 +15,7 @@ A transformation description is a dictionary with the following keys:
   current time, it must be one of ``set`` or ``remove``.
 
 - ``value`` for the value to set or remove according to the choosen
-  operation.
-
-"""
+  operation."""
 
 schemes = {'bibebook': {'path': 'stylesheet.css',
                         'transformations':
@@ -58,4 +56,7 @@ schemes = {'bibebook': {'path': 'stylesheet.css',
                                              'operator': 'set'},
                                             {'property': 'width',
                                              'value': '100%',
+                                             'operator': 'set'},
+                                            {'property': 'display',
+                                             'value': 'block',
                                              'operator': 'set'}]}}}
