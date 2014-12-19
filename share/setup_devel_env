@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+
+VIRTUALENV_PATH="$HOME/.virtualenvs/bkleaner"
+PYTHONPATH="$HOME/Projets/bkleaner/bkleaner"
+
+source "$VIRTUALENV_PATH/bin/activate"
+
+export PYTHONPATH
