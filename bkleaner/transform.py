@@ -6,7 +6,7 @@ logger = logging.getLogger('bkleaner')
 
 
 class Transformer(object):
-    """CSS style sheets transformer"""
+    """CSS style sheets transformer."""
 
     def __init__(self, scheme):
         """Store the scheme of transformations to apply."""
@@ -26,11 +26,11 @@ class Transformer(object):
         else:
             values = [v.strip() for v in raw.split(',')]
             must_remove = (values == [value])
-            
+
         if must_remove:
             selector.style.removeProperty(name)
             msg = ("""Removing attribute '{name}' """
-                   """ for '{selector}' selector""")          
+                   """for '{selector}' selector""")
         elif value in values:
             values = [v for v in values if v != value]
             selector.style.setProperty(name, ', '.join(values))
@@ -39,7 +39,7 @@ class Transformer(object):
         logger.info(msg.format(value=value,
                                name=name,
                                selector=selector.selectorText))
-        
+
     def __call__(self, sheet):
         """Transform the given CSS stylesheet."""
         for selector in sheet:
